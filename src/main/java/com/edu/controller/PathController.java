@@ -15,15 +15,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/pat")
 public class PathController {
-  @RequestMapping(value="/registerGet", method=RequestMethod.GET)
+  @RequestMapping(value="/register", method=RequestMethod.GET)
   public String registerGet(@RequestParam(value="message", required=false) String message, Model model) {
-    log.info(String.format("registerGet get 방식 호출및 요청데이터 받아서 다시 화면에 전달 : %s" , message ));
-    
+    log.info(String.format("register get 방식 호출및 요청데이터 받아서 다시 화면에 전달 : %s" , message ));
     model.addAttribute("test", "일단테스트합니다");
     if(message != null && message.length() > 0 ){
       model.addAttribute("test", message);
     }
-      return "pat/registerGet";
+      return "pat/register";
   }
   
+  @RequestMapping(value="/register", method=RequestMethod.POST)
+  public String registerPost(@RequestParam(value="message", required=false) String message, Model model) {
+    log.info(String.format("register post 방식 호출및 요청데이터 받아서 다시 화면에 전달 : %s" , message ));
+    model.addAttribute("test", "일단테스트합니다");
+    if(message != null && message.length() > 0 ){
+      model.addAttribute("test", message);
+    }
+      return "pat/register";
+  }
 }

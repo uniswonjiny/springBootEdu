@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>get방식 화면호출 기본1</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+  <div>
+    서버 model 전달 받은 값: {{ test }}
+  </div>
+  <br/>
+  <br/>
+  <hr/>
+  <br/>
+  <br/>
+  <div>
+    <form action="/pat/register" method="post">
+      전달값 : <input type="text" name="message" />
+      <br/>
+      <br/>
+      <button type="submit">post 방식 서버에 전달</button>
+    </form>
+  </div>
+</body>
+</html>
