@@ -33,5 +33,10 @@ public class JsonController {
     returnMap.put("user_etc", list);
     return returnMap;
   }
+
+  @GetMapping("/base")
+  public String baseHtml(){
+    return "json/base";
+  }
   
 }

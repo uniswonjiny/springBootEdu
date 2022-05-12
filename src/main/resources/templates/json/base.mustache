@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    const btn1Handler = () => {
+      let user_id = document.querySelector("#user_id").value;
+      axios.get(`/json1/user/${user_id}`)
+      .then(res => {
+        alert( JSON.stringify(res.data))
+      })
+
+    }
+  </script>
+</head>
+<body>
+  <hr/>
+  <h1> 서버 비동기 호출을 동한 데이터 수신</h1>
+  <div>
+    <b> 사용자 아이디 </b> <input type="text" id="user_id" /><br/><br/>
+    <button onclick="btn1Handler()">사용자 정보 호출</button>
+  </div>
+  <hr/>
+</body>
+</html>
