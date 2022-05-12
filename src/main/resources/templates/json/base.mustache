@@ -10,9 +10,23 @@
   <script>
     const btn1Handler = () => {
       let user_id = document.querySelector("#user_id").value;
+      let targetData;
+      let htmlTeplate;
       axios.get(`/json1/user/${user_id}`)
       .then(res => {
-        alert( JSON.stringify(res.data))
+        document.querySelector("#btn1target").innerText =JSON.stringify(res.data);
+        alert( JSON.stringify(res.data));
+        targetData = res.data;
+        return Promise.resolve();
+      })
+      .then( _=> {
+        console.log(' 이전 단계 실행이 꼭 먼저 되어야 하고 다음 단계실행이 필요한 경우');
+        htmlTeplate = `
+          <div> 사용자 아이디  : <b> ${targetData.user_id} </b></div>
+          <div> 사용자 이름  : <b> ${targetData.user_name} </b></div>
+          <div> 사용자 기타사항  : <b> ${targetData.user_etc} </b></div>
+        `;
+        document.querySelector("#btn1target").innerHTML = htmlTeplate;
       })
 
     }
@@ -24,6 +38,10 @@
   <div>
     <b> 사용자 아이디 </b> <input type="text" id="user_id" /><br/><br/>
     <button onclick="btn1Handler()">사용자 정보 호출</button>
+  </div>
+  <div id="btn1target"></div><br/><br/>
+  <div id="btn2target">
+
   </div>
   <hr/>
 </body>
