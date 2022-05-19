@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.edu.domain.NewsMainDTO;
+import com.edu.service.NewService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/json1")
 public class JsonController {
+  @Autowired
+  NewService newService;
+
   @GetMapping("/user/{userId}")
   @ResponseBody
   public HashMap<String, Object> userIdInfo( @PathVariable("userId") String userId){
@@ -37,6 +46,12 @@ public class JsonController {
   @GetMapping("/base")
   public String baseHtml(){
     return "json/base";
+  }
+
+  @ResponseBody
+  @GetMapping("/news")
+  public ResponseEntity<List<NewsMainDTO>> newJson() throws Exception{
+    return new ResponseEntity<List<NewsMainDTO>>(newService.mainNewsList(), HttpStatus.OK);
   }
   
 }

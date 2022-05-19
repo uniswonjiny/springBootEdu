@@ -15,16 +15,19 @@
       axios.get(`/json1/user/${user_id}`)
       .then(res => {
         document.querySelector("#btn1target").innerText =JSON.stringify(res.data);
-        alert( JSON.stringify(res.data));
+        //alert( JSON.stringify(res.data));
+        // targetData 로 그려보기
+        // 데이터 넘겨서 그려보기
         targetData = res.data;
-        return Promise.resolve();
+        console.log(res.data);
+        return res.data
       })
-      .then( _=> {
+      .then( data => {
         console.log(' 이전 단계 실행이 꼭 먼저 되어야 하고 다음 단계실행이 필요한 경우');
         htmlTeplate = `
-          <div> 사용자 아이디  : <b> ${targetData.user_id} </b></div>
-          <div> 사용자 이름  : <b> ${targetData.user_name} </b></div>
-          <div> 사용자 기타사항  : <b> ${targetData.user_etc} </b></div>
+          <div> 사용자 아이디  : <b> ${data.user_id} </b></div>
+          <div> 사용자 이름  : <b> ${data.user_name} </b></div>
+          <div> 사용자 기타사항  : <b> ${data.user_etc} </b></div>
         `;
         document.querySelector("#btn1target").innerHTML = htmlTeplate;
       })
