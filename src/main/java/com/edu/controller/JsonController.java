@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/json1")
+@CrossOrigin(origins={"*"})
 public class JsonController {
   @Autowired
   NewService newService;
@@ -49,9 +51,10 @@ public class JsonController {
   }
 
   @ResponseBody
-  @GetMapping("/news")
-  public ResponseEntity<List<NewsMainDTO>> newJson() throws Exception{
-    return new ResponseEntity<List<NewsMainDTO>>(newService.mainNewsList(), HttpStatus.OK);
+  @GetMapping("/news/{newsType}/{pageNumer}")
+  public ResponseEntity<List<NewsMainDTO>> newJson( @PathVariable("newsType")String newsType,  @PathVariable("pageNumer") int pageNumer) throws Exception{
+    // 페이지 크기는 10개식 전달
+    return new ResponseEntity<List<NewsMainDTO>>(newService.mainNewsList(newsType, pageNumer), HttpStatus.OK);
   }
   
 }

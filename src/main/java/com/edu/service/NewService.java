@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.edu.domain.NewsMainDTO;
 
-import org.springframework.stereotype.Service;
-
 public interface NewService {
-  public  List<NewsMainDTO> mainNewsList() throws Exception;
+  public  List<NewsMainDTO> mainNewsList(String newsType , int pageNumer ) throws Exception;
 }

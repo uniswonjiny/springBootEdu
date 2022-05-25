@@ -4,7 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.edu.mapper.NewMainMapper">
-  <select id="mainNewsList" resultType="NewsMainDTO">
-    select * from TB_NEWS_MAIN
+  <select id="mainNewsList" resultType="NewsMainDTO" parameterType="HashMap">
+    select * from (
+      select SEQ,
+        NEW_TYPE,
+        ID,
+        TYPE,
+        TITLE,
+        POINT,
+        "user",
+        CREATED_AT,
+        COMMENTS_COUNT,
+        URL,
+        DOMAIN,
+        ROWNUM as pageNum
+    from TB_NEWS_MAIN 
+    where NEW_TYPE = #{newsType}
+      order by SEQ desc
+    ) a
+    where pageNum between #{startNum} and #{endNum}
   </select>
+
 </mapper>
